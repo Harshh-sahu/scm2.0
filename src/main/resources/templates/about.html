@@ -1,23 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>THIS is about page</h1>
-    <hr />
-    <!-- 
-    using fragment-->
-    <div class="host-tag" th:replace="~{base :: parent(~{::section})}">
-      <section>
-        <h2>Dynamic Content</h2>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis,
-          voluptates?
-        </p>
-      </section>
+<html lang="en" th:replace="~{base ::parent(~{::#content},~{::title},~{::script})}">
+<head>
+    <title>About Page</title>
+</head>
+<body>
+    <div id="content">
+   <h1>welcome to about page</h1>
+   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere!</p>
     </div>
-  </body>
+    <script>
+        console.log("aboutpage")
+    </script>
+</body>
 </html>
