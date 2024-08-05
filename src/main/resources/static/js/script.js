@@ -1,48 +1,42 @@
 console.log("SCRIPT LOADED");
 
 let currentTheme = getTheme();
-//INTIAILY CHANGE THEME
-changeTheme(currentTheme)
+// Initially change theme
+applyTheme(currentTheme);
 
-// todo
-function changeTheme() {
-   //set to web page
-   document.querySelector('html').classList.add(currentTheme);
-   //set the listener to change theme button
+function applyTheme(theme) {
+  const htmlElement = document.querySelector('html');
+  htmlElement.classList.add(theme);
 
-   const changeThemeButton = document.querySelector('#theme_change_button')
-     changeThemeButton.addEventListener("click",(event)=>{
-        const oldTheme = currentTheme;
-        console.log("change theme buttom clicked");
-   
-        if(currentTheme === "dark"){
-            //theme ko light krna
-          currentTheme="light";
-        }else{
-            //theme ko dark 
-            currentTheme="dark";
-        }
+  const changeThemeButton = document.querySelector('#theme_change_button');
+  const themeText = changeThemeButton.querySelector("span");
+  const themeIcon = changeThemeButton.querySelector("i");
 
-        //local storage update kro
-        setTheme(currentTheme);
-             //remove the current theme
-             document.querySelector('html').classList.remove(oldTheme);
-        //set the currnet theme
-        document.querySelector('html').classList.add(currentTheme);
+  // Set initial text and icon
+  themeText.textContent = theme === "light" ? "Dark" : "Light";
+  themeIcon.className = theme === "light" ? "fa-regular fa-moon" : "fa-solid fa-moon";
 
-     });
+  changeThemeButton.addEventListener("click", () => {
+    console.log("Change theme button clicked");
 
+    const newTheme = theme === "dark" ? "light" : "dark";
+    htmlElement.classList.replace(theme, newTheme);
+
+    // Update the theme in local storage
+    setTheme(newTheme);
+
+    // Update the button text and icon
+    themeText.textContent = newTheme === "light" ? "Dark" : "Light";
+    themeIcon.className = newTheme === "light" ? "fa-regular fa-moon" : "fa-solid fa-moon";
+
+    theme = newTheme;
+  });
 }
-
-//SET THEME TO LOCAL STORAGE
 
 function setTheme(theme) {
   localStorage.setItem("theme", theme);
 }
-//GET THEME FROM LOCAL STORAGE
 
 function getTheme() {
-  let theme = localStorage.getItem("theme");
-  if (theme) return theme;
-  else return "light";
+  return localStorage.getItem("theme") || "light";
 }
