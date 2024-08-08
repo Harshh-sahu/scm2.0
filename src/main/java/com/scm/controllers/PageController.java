@@ -1,15 +1,24 @@
 package com.scm.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.scm.entities.User;
+import com.scm.forms.UserForm;
+import com.scm.services.UserService;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class PageController {
+     @Autowired
+    private UserService userService;
+
   @RequestMapping("/home")
   public String home(Model model) {
     model.addAttribute("name", "substring technologies");
@@ -45,9 +54,39 @@ public class PageController {
     return new String("login");
   }
 
-  @GetMapping("register")
-  public String register() {
-    return new String("register");
+  @GetMapping("/register")
+  public String register(Model model) {
+
+    UserForm userForm = new UserForm();
+   
+    model.addAttribute("userForm", userForm);
+    return "register";
+  }
+
+  //proccessing register 
+ @RequestMapping(value = "/do-register",method = RequestMethod.POST)
+  public String processRegister(@ModelAttribute UserForm userForm){
+  //  System.out.println(userForm);
+  //  User user = User.builder()
+  //  .name(userForm.getName())
+  //  .email(userForm.getEmail())
+  //  .password(userForm.getPassword())
+  //  .about(userForm.getAbout())
+  //  .phoneNumber(userForm.getPhoneNumber())
+  //  .profilePic("https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?w=740&t=st=1723140620~exp=1723141220~hmac=747a6c4e99252915c8fb925169e89a42bcc03a6d378e053dee52678308aba8eb")
+  //  .build();
+
+
+  User user = new User();
+  user.setName(userForm.getName());
+  user.setEmail(userForm.getEmail());
+  user.setPassword(userForm.getPassword());
+  user.setAbout(userForm.getAbout());
+  user.setPhoneNumber(userForm.getPhoneNumber());
+  user.setProfilePic("https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?w=740&t=st=1723140620~exp=1723141220~hmac=747a6c4e99252915c8fb925169e89a42bcc03a6d378e053dee52678308aba8eb");
+  User savedUser= userService.saveUser(user);
+  System.out.println("user SAved Successfully");
+    return "redirect:/register";
   }
 
 }
