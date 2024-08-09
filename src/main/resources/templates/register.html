@@ -39,7 +39,8 @@
         data-th-action="@{'/do-register'}" 
         method="post"
         data-th-object="${userForm}"
-        class="mt-5">
+        class="mt-5"
+        novalidate>
             <!--name-->
             <div class="mb-3">
                 <label for="name"
@@ -49,6 +50,10 @@
                 <input type="text" id="name" 
                 data-th-field="*{name}"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Here" required />
+                <p
+                 data-th-if="${#fields.hasErrors('name')}"
+                 data-th-errors="*{name}"
+                class="text-red-600 px-1 py-2 "> Name is Required</p>
               </div>
 
               <!--Email field-->
@@ -57,6 +62,11 @@
                 <input
                 data-th-field="*{email}"
                 type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Email" required />
+
+                <p
+                data-th-if="${#fields.hasErrors('email')}"
+                data-th-errors="*{email}"
+               class="text-red-600 px-1 py-2 "> </p>
               </div>
 
               <!-- password-->
@@ -66,6 +76,10 @@
                 <input type="password" 
                 data-th-field="*{password}"
                 id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your password" required />
+                <p
+                data-th-if="${#fields.hasErrors('password')}"
+                data-th-errors="*{password}"
+               class="text-red-600 px-1 py-2 "> </p>
               </div>
 
               <!--phone field-->
@@ -75,6 +89,10 @@
                 <input type="number" id="phone" 
                 data-th-field="*{phoneNumber}"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Number" required />
+                <p
+                data-th-if="${#fields.hasErrors('phoneNumber')}"
+                data-th-errors="*{phoneNumber}"
+               class="text-red-600 px-1 py-2 "> </p>
               </div>
 
               <!--ABOUT TEXT AREA-->
@@ -84,6 +102,10 @@
 <textarea 
 data-th-field="*{about}"
 id="about" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write here..."></textarea>
+<p
+data-th-if="${#fields.hasErrors('about')}"
+data-th-errors="*{about}"
+class="text-red-600 px-1 py-2 "> </p>
 
 
 
@@ -98,6 +120,7 @@ id="about" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 r
         <span class="relative text-blue-600 transition-colors duration-200 ease-in-out delay-100 group-hover:text-white">&nbsp;&nbsp;&nbsp;SignUp&nbsp;&nbsp;   </span>
         </button>
 
+       
     <button type="reset" class="relative inline-block text-lg group">
         <span class="relative z-10 block px-3 py-2 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
         <span class="absolute inset-0 w-full h-full px-5 py-3 rounded-lg bg-gray-50"></span>
