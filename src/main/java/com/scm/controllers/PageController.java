@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.scm.entities.User;
 import com.scm.forms.UserForm;
+import com.scm.helper.Message;
+import com.scm.helper.MessageType;
 import com.scm.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -65,7 +69,7 @@ public class PageController {
 
   //proccessing register 
  @RequestMapping(value = "/do-register",method = RequestMethod.POST)
-  public String processRegister(@ModelAttribute UserForm userForm){
+  public String processRegister(@ModelAttribute UserForm userForm,HttpSession session){
   //  System.out.println(userForm);
   //  User user = User.builder()
   //  .name(userForm.getName())
@@ -86,7 +90,14 @@ public class PageController {
   user.setProfilePic("https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?w=740&t=st=1723140620~exp=1723141220~hmac=747a6c4e99252915c8fb925169e89a42bcc03a6d378e053dee52678308aba8eb");
   User savedUser= userService.saveUser(user);
   System.out.println("user SAved Successfully");
+
+
+  //add the message
+ Message message= Message.builder().content("Registration Successfull").type(MessageType.green).build();
+session.setAttribute("message",message);
+
     return "redirect:/register";
+    
   }
 
 }
