@@ -7,9 +7,11 @@ import java.util.logging.Logger;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.scm.entities.User;
+import com.scm.helper.AppConstants;
 import com.scm.helper.ResourceNotFoundException;
 import com.scm.repositories.UserRepo;
 import com.scm.services.UserService;
@@ -18,6 +20,8 @@ import com.scm.services.UserService;
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
     private UserRepo userRepo;
     private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -25,7 +29,11 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) {
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
-        //
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        //set the user role
+
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
         return userRepo.save(user);
     }
 
@@ -66,19 +74,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isUserExist(String userId) {
         User user2 = userRepo.findById(userId).orElse(null);
-        return user2 != null? true : false;
+        return user2 != null ? true : false;
 
     }
 
     @Override
     public boolean isUserExistByEmail(String email) {
-      User user= userRepo.findByEmail(email).orElse(null);
-      return user!= null? true : false;
+        User user = userRepo.findByEmail(email).orElse(null);
+        return user != null ? true : false;
     }
 
     @Override
     public List<User> getAllUsers() {
-       return userRepo.findAll();
+        return userRepo.findAll();
     }
 
 }
