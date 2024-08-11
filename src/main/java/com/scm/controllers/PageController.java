@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.scm.entities.User;
@@ -20,6 +21,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PageController {
@@ -100,6 +102,15 @@ public class PageController {
   
       return "redirect:/register";
   }
-  
+  @PostMapping("/authenticate")
+public String authenticateUser(@RequestParam String email, @RequestParam String password) {
+    // Authentication logic
+    return "redirect:/user/profile"; // or the appropriate redirect URL
+}
+  @RequestMapping("/")
+  public String index(){
+
+    return "redirect:/home";
+  }
 
 }
