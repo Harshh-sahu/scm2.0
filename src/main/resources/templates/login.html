@@ -32,6 +32,10 @@
       
            
             <!-- this is  form -->
+            <div class="text-red-600 text-center" th:if="${param.error}">
+              Invalid username and password.</div>
+            <div class="text-green-700 text-center" th:if="${param.logout}">
+              You have been logged out.</div>
             <form
               method="post"
               data-th-action="@{'/authenticate'}"

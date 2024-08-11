@@ -85,13 +85,15 @@ public class SecurityConfig {
         httpSecurity.formLogin(formLogin -> {
             formLogin.loginPage("/login").loginProcessingUrl("/authenticate")
                      .defaultSuccessUrl("/user/dashboard", true) // Force redirection to /user/dashboard
-                     .failureUrl("/login?error=true") // Redirect on failure
                      .usernameParameter("email")
                      .passwordParameter("password");
         });
         
- 
-
+ httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        httpSecurity.logout(logoutForm->{
+            logoutForm.logoutUrl("/do-logout");
+            logoutForm.logoutSuccessUrl("/login?logout=true");
+        });
         return httpSecurity.build();
 
     }
