@@ -17,10 +17,31 @@ class="light" lang="en" th:fragment="parent(content,title,script)" xmlns:th="htt
   </head>
   <body class="dark:bg-gray-900 bg-gray-100 dark:text-white">
 
+<!--if usesr is logged in navbar-->
+<div th:if="${loggedInUser}" >
+
+<div data-th-replace="~{user/user_navbar::user-navbar}">
+
+
+
+  
+</div>
+
+
+<!--if usesr is not logged in navbar-->
+<div th:unless="${loggedInUser}">
+
     <!-- coomon header -->
-    <div data-th-replace="navbar :: navbar">
+    <div data-th-replace="~{navbar :: navbar}">
 
     </div>
+
+</div>
+
+</div>
+
+
+
     <!-- coomon footer -->
      <!-- <footer class="pt-4  ">This is common footer</footer> -->
     <!-- coomon footer -->

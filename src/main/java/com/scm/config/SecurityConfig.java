@@ -78,7 +78,7 @@ public class SecurityConfig {
         // related
         httpSecurity.formLogin(formLogin -> {
             formLogin.loginPage("/login").loginProcessingUrl("/authenticate")
-                    .defaultSuccessUrl("/user/dashboard", true) // Force redirection to /user/dashboard
+                    .defaultSuccessUrl("/user/profile", true) // Force redirection to /user/dashboard
                     .usernameParameter("email")
                     .passwordParameter("password");
         });
@@ -93,6 +93,7 @@ public class SecurityConfig {
 
         httpSecurity.oauth2Login(oauth->{
 oauth.loginPage("/login");
+
 oauth.successHandler(handler);
         });
 

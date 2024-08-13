@@ -43,7 +43,7 @@ if(authentication instanceof OAuth2AuthenticationToken){
             String email = oauth2User.getAttribute("email") != null ? oauth2User.getAttribute("email").toString()
             : oauth2User.getAttribute("login").toString() + "@gmail.com";
 
-            System.out.println("GETTING EMAIL FOR github");
+            System.out.println("GETTING EMAIL FOR github"+email);
 
         }
    //sign in with facebook
