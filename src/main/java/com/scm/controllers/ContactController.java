@@ -1,5 +1,7 @@
 package com.scm.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import com.scm.helper.Helper;
 import com.scm.helper.Message;
 import com.scm.helper.MessageType;
 import com.scm.services.ContactService;
+import com.scm.services.ImageSevice;
 import com.scm.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -27,8 +30,12 @@ import org.springframework.validation.BindingResult;
 @RequestMapping("/user/contacts")
 public class ContactController {
 
+
+        private Logger logger = LoggerFactory.getLogger(ContactController.class);
     @Autowired
     private UserService userService;
+    @Autowired
+    private ImageSevice imageSevice;
     @Autowired
     private ContactService contactService;
 
@@ -61,7 +68,18 @@ public class ContactController {
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
     
-        Contact contact = new Contact();
+
+        //processing an image
+    //upload krne ka code
+    
+    String fileURL = imageSevice.uploadImage(contactForm.getContactImage());
+
+
+
+        
+         
+   logger.info("file information :{}",contactForm.getContactImage().getOriginalFilename());
+        Contact contact = new Contact() ;
         contact.setName(contactForm.getName());
         contact.setFavorite(contactForm.isFavorite());
         contact.setEmail(contactForm.getEmail());
@@ -71,8 +89,8 @@ public class ContactController {
         contact.setDescription(contactForm.getDescription());
         contact.setLinkedInLink(contactForm.getLinkedInLink());
         contact.setWebsiteLink(contactForm.getWebsiteLink());
-    
-        contactService.save(contact);
+    contact.setPicture(fileURL);
+    //    contactService.save(contact);
         httpSession.setAttribute("message", Message.builder().content("You have successfully add a new contact").type(MessageType.green)
         .build());
         
