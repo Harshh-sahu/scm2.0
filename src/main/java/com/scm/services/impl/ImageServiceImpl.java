@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
+import com.scm.helper.AppConstants;
 import com.scm.services.ImageSevice;
 
 @Service
@@ -19,26 +21,40 @@ public class ImageServiceImpl implements ImageSevice {
         this.cloudinary = cloudinary;
     }
     @Override
-    public String uploadImage(MultipartFile contactImage) {
+    public String uploadImage(MultipartFile contactImage,String filename) {
      
-        String filename = UUID.randomUUID().toString();
         // Implement image uploading logic here
 try {
     byte[] data = new byte[contactImage.getInputStream().available()];
     contactImage.getInputStream().read(data);
     cloudinary.uploader().upload(data, ObjectUtils.asMap("public_id",filename));
+   return this.getUrlFromPublicId(filename);
 } catch (IOException e) {
     e.printStackTrace();
+    
+return null;
+
 }
 //and return karega url
-
-return "";
 
 
 
 
     }
+    @Override
+    public String getUrlFromPublicId(String publicId) {
+       
+return cloudinary.url()
+.transformation(
+    new Transformation<>().width(AppConstants.CONTACT_IMAGE_WIDTH).height(AppConstants.CONTACT_IMAGE_HEIGHT).crop(AppConstants.CONTACT_IMAGE_CROP)
+).generate(publicId);
 
+
+    }
+
+
+
+// 
 
 
 }

@@ -33,6 +33,7 @@ public class Contact {
     private boolean favorite = false;
     private String websiteLink;
     private String linkedInLink;
+    private String cloudinaryImagePublicId;
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "contact",cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true )
