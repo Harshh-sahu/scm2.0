@@ -153,7 +153,10 @@ data-th-field="*{contactImage}"  type="file">
 
 <img class="max-h-52 mx-auto rounded-lg shadow m-3" src="" id="upload_image_preview" alt="">
 
-
+<p class="text-red-600" th:if="${#fields.hasErrors('contactImage')}"
+th:errors="*{contactImage}">
+INVALID NAME
+</p>
 
 </div>
 <!--favourites checkbox-->
