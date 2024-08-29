@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.scm.entities.Contact;
+import com.scm.entities.User;
 import com.scm.helper.ResourceNotFoundException;
 import com.scm.repositories.ContactRepo;
 import com.scm.services.ContactService;
@@ -50,14 +51,23 @@ public class contactServiceImpl implements ContactService {
     contactRepo.delete(contact);
     }
 
-    @Override
-    public List<Contact> search(String name, String email, String phoneNumber) {
-       
-    }
+  
 
     @Override
     public List<Contact> getByUserId(String userId) {
       return contactRepo.findByUserId(userId);
+    }
+
+    
+    @Override
+    public List<Contact> getByUser(User user) {
+       return  contactRepo.findByUser(user);
+    }
+
+    @Override
+    public List<Contact> searchByName(String name, String email, String phoneNumber) {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'searchByName'");
     }
 
 }
