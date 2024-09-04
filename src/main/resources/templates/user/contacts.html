@@ -68,6 +68,10 @@ data-th-field="*{value}"
             </div>
             <button type="submit" class="px-3 py-3 bg-gray-800 text-white rounded">Search</button>
           </div>
+
+
+
+          <div data-th-replace="~{message :: messagebox}"></div>
           </form>
               <table
                 class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
@@ -135,15 +139,18 @@ data-th-field="*{value}"
                     </td>
                     <td class="px-6 py-4">
                       <div>
-                        <a href="">
+                        <button th:onclick="deleteContact([[${c.id}]])">
                           <i class="fa-solid w-6 h-6 fa-delete-left"></i>
-                        </a>
+                      </button>
+                        <!-- <a data-th-href="@{'/user/contacts/delete/'+*{id}}">
+                          <i class="fa-solid w-6 h-6 fa-delete-left"></i>
+                        </a> -->
                         <a href="">
                           <i class="fa-solid w-6 h-6 fa-pen-nib"></i>
                         </a>
-                        <a href="">
+                        <button th:data-id="${c.id}"  th:onclick="loadContactData(this.getAttribute('data-id'))" >
                           <i class="fa-solid w-6 h-6 fa-eye"></i>
-                        </a>
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -197,6 +204,9 @@ data-th-field="*{value}"
       </div>
  
     </div>
+    <script data-th-src="@{'/js/contacts.js'}" >
+
+    </script>
     <script>
       console.log("this is a profile Page");
     </script>

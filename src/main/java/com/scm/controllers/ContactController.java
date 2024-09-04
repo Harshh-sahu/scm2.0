@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -162,4 +163,19 @@ public class ContactController {
 
 
 
+    //delte contact
+
+    @RequestMapping("/delete/{contactId}")
+     public String deleteContact(@PathVariable("contactId") String contactId,HttpSession httpSession){
+
+
+             contactService.delete(contactId);
+             logger.info("contactId {} deleted",contactId);
+
+System.out.println("-------------------------------------------------------------------------------------------------------------------------"+contactId);
+
+httpSession.setAttribute("message",Message.builder()
+.content("contact is deleted succesfully").type(MessageType.green).build());
+        return "redirect:/user/contacts";
+     }
 }
