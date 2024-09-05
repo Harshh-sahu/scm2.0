@@ -44,4 +44,7 @@ public class ContactForm {
        //resolution
        @ValidFile(message ="invalid file" )
     private MultipartFile contactImage;
+
+
+    private String picture;
 }
