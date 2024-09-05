@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.scm.services.impl.SecurityCustomUserDetailService;
@@ -42,6 +43,9 @@ public class SecurityConfig {
     // return inMemoryUserDetailsManager;
 
     // }
+
+    @Autowired
+    private AuthenticationFailureHandler authenticationFailureHandler;
 
     @Autowired
     private OAuthAuthenticationSuccessHandler handler;
@@ -84,6 +88,9 @@ public class SecurityConfig {
                     .defaultSuccessUrl("/user/profile", true) // Force redirection to /user/dashboard
                     .usernameParameter("email")
                     .passwordParameter("password");
+
+
+                    formLogin.failureHandler(authenticationFailureHandler);
         });
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);

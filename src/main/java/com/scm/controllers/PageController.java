@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.scm.entities.User;
 import com.scm.forms.UserForm;
+import com.scm.helper.AppConstants;
 import com.scm.helper.Message;
 import com.scm.helper.MessageType;
 import com.scm.services.UserService;
@@ -91,7 +92,8 @@ public class PageController {
       user.setPassword(userForm.getPassword());
       user.setAbout(userForm.getAbout());
       user.setPhoneNumber(userForm.getPhoneNumber());
-      user.setProfilePic("https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?w=740&t=st=1723140620~exp=1723141220~hmac=747a6c4e99252915c8fb925169e89a42bcc03a6d378e053dee52678308aba8eb");
+      user.setEnabled(false);
+      user.setProfilePic(AppConstants.Default_Image);
   
       User savedUser = userService.saveUser(user);
       System.out.println("User saved successfully");

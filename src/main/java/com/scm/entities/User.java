@@ -51,7 +51,7 @@ public class User implements UserDetails {
     private String profilePic;
     private String phoneNumber;
     @Getter(value = AccessLevel.NONE)
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     private boolean emailVerified = false;
     private boolean phoneVerified = false;
@@ -84,5 +84,10 @@ public class User implements UserDetails {
     public String getPassword() {
         return this.password;
     }
+
+
+
+
+    
 
 }
