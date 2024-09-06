@@ -13,13 +13,17 @@ import org.springframework.stereotype.Service;
 
 import com.scm.entities.User;
 import com.scm.helper.AppConstants;
+import com.scm.helper.Helper;
 import com.scm.helper.ResourceNotFoundException;
 import com.scm.repositories.UserRepo;
+import com.scm.services.EmailService;
 import com.scm.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
+    private EmailService emailService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -32,10 +36,55 @@ public class UserServiceImpl implements UserService {
         user.setUserId(userId);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        //set the user role
+        // set the user role
 
         user.setRoleList(List.of(AppConstants.ROLE_USER));
-        return userRepo.save(user);
+
+        String emailToken = UUID.randomUUID().toString();
+        user.setEmailToken(emailToken);
+        User savedUser = userRepo.save(user);
+
+        String emailLink = Helper.getLinkedForEmailVerification(emailToken);
+
+        // emailService.sendEmail(savedUser.getEmail(), "Verify Account : smart COntact Manager", emailLink);
+
+        String htmlBody = "<!DOCTYPE html>" +
+                "<html lang='en'>" +
+                "<head>" +
+                "<meta charset='UTF-8'>" +
+                "<meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+                "<style>" +
+                "body { font-family: 'Arial', sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; color: #333; }"
+                +
+                ".container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }"
+                +
+                "h1 { color: #4CAF50; font-size: 24px; margin-bottom: 20px; text-align: center; }" +
+                "p { font-size: 16px; line-height: 1.6; margin-bottom: 20px; }" +
+                ".btn { display: block; width: 200px; text-align: center; background-color: #4CAF50; color: white; padding: 12px 0; text-decoration: none; border-radius: 5px; font-size: 18px; margin: 0 auto; }"
+                +
+                ".footer { margin-top: 20px; text-align: center; font-size: 14px; color: #888; }" +
+                "</style>" +
+                "</head>" +
+                "<body>" +
+                "<div class='container'>" +
+                "<h1>Welcome to Smart Contact Manager!</h1>" +
+                "<p>Hello Customer,</p>" + // You can replace this with dynamic name
+                "<p>We are excited to have you on board. Your email has been successfully verified, and your Smart Contact Manager account is now activated.</p>"
+                +
+                "<p>Click the button below to get started:</p>" +
+                "<a href='" + emailLink + "' class='btn'>Login Now</a>" + // Dynamic link here
+                "<p>If you encounter any issues, feel free to reach out to our support team.</p>" +
+                "<p>Thank you for choosing Smart Contact Manager.</p>" +
+                "<div class='footer'>" +
+                "<p>Smart Contact Manager Team</p>" +
+                "<p>&copy; 2024 Smart Contact Manager</p>" +
+                "</div>" +
+                "</div>" +
+                "</body>" +
+                "</html>";
+        emailService.sendEmailWithHtml(savedUser.getEmail(), "Welcome to Smart Contact Manager!", htmlBody);
+
+        return savedUser;
     }
 
     @Override
@@ -90,11 +139,10 @@ public class UserServiceImpl implements UserService {
         return userRepo.findAll();
     }
 
-
     @Override
-  public User getUserByEmail(String email) {
-    return userRepo.findByEmail(email)
-                   .orElse(null);
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email)
+                .orElse(null);
 
-  }
+    }
 }

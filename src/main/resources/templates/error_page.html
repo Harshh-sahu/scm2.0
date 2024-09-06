@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base ::parent(~{::#content}, ~{::title}, ~{::script})}">
+<head>
+    <title>Email Not Verified</title>
+</head>
+<body>
+    <div id="content"  class="text-2xl mx-auto mt-5 md:w-1/2  text-center mt-10">
+        <div  data-th-replace="message::messagebox"></div>
+        <h1 class="text-red-500 font-bold">Oops! Your email was not verified.</h1>
+        <p class="text-gray-700 mt-4">It looks like you haven't verified your email address yet. Please check your inbox or spam folder for the verification email.</p>
+        <p>If you didn't receive an email, click the button below to resend the verification link.</p>
+        <a href="/login"  class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Login</a>
+    </div>
+    <script>
+        console.log("Email Not Verified Page");
+    </script>
+</body>
+</html>

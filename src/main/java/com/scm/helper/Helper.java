@@ -56,4 +56,12 @@ if(authentication instanceof OAuth2AuthenticationToken){
 }
       
     }
+
+
+
+    public static String getLinkedForEmailVerification(String emailToken){
+        String link ="http://localhost:8081/auth/verify-email?token="+emailToken;
+
+        return link;
+    }
 }

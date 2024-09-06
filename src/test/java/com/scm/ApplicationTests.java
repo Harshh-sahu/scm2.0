@@ -8,17 +8,24 @@ import com.scm.services.EmailService;
 
 @SpringBootTest
 class ApplicationTests {
+	@Autowired
+	private EmailService kk;
 
 	@Test
 	void contextLoads() {
+         
 	}
 
-// @Autowired
-// 	private EmailService service;
 
-// 	void snedEmailTest(){
-// 		service.sendEmail("harshsahu1143@gmail.com", "Just Testing email Serivce", "this is scm Project working on ");
+	// @Autowired
+	// private EmailService service;
 
-// 	}
+	// @Test
+	// void sendEmail(){
+	// 	service.sendEmail("harshsahu1143@gmail.com", "Testing purpose", "this is scm project working on email service");
+	// }
+
+
+
 
 }
