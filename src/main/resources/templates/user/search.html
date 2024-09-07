@@ -81,9 +81,28 @@
                 >
                   Search
                 </button>
+
+
+
+                <div>
+                  <button
+                    type="button"
+                    onclick="exportData()"
+                    class="px-3 py-3 bg-green-800 text-white rounded"
+                  >
+                    Export
+                  </button>
+                </div>
               </div>
+         
             </form>
-            <table
+            
+            <div>
+
+              
+            </div>
+    
+            <table id="contact-table"
               data-th-if="${pageContact.totalElements>0}"
               class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
@@ -214,11 +233,21 @@
         <div data-th-replace="~{user/contact_modals :: contact}"></div>
       </div>
     </div>
-
-    <script data-th-src="@{'/js/contacts.js'}"></script>
-
-    <script>
-      console.log("this is profile page");
-    </script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/@linways/table-to-excel@1.0.4/dist/tableToExcel.min.js
+    "></script>
+        <script data-th-src="@{'/js/contacts.js'}"></script>
+        <script>
+          console.log("this is a profile Page");
+    
+          function exportData() {
+            TableToExcel.convert(document.getElementById("contact-table"), {
+      name: "contact.xlsx",
+      sheet: {
+        name: "Sheet 1"
+      }
+    });
+          }
+        </script>
   </body>
 </html>
