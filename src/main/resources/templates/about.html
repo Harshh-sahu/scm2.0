@@ -2,14 +2,53 @@
 <html lang="en" th:replace="~{base ::parent(~{::#content},~{::title},~{::script})}">
 <head>
     <title>About Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div id="content">
-   <h1>welcome to about page</h1>
-   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, facere!</p>
+<body class="bg-gray-100">
+<div id="content" class="p-8 max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Welcome to the About Page</h1>
+    <p class="text-lg text-center text-gray-600 mb-6">
+        Smart Contact Manager (SCM) is your all-in-one solution for efficient, secure, and user-friendly contact management.
+    </p>
+
+    <!-- Features Section -->
+    <div class="features-section mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Feature 1 -->
+        <div class="feature-card p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Efficient Organization</h2>
+            <p class="text-gray-600">
+                Categorize and manage your contacts effortlessly with an intuitive interface designed for ease of use.
+            </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Secure Data Storage</h2>
+            <p class="text-gray-600">
+                Your contact data is stored with the highest security standards to ensure data privacy and protection.
+            </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Cross-Platform Access</h2>
+            <p class="text-gray-600">
+                Access your contact information across all your devices, with synchronization for seamless use.
+            </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Analytics and Insights</h2>
+            <p class="text-gray-600">
+                Gain valuable insights into your contacts and enhance your relationships with built-in analytics.
+            </p>
+        </div>
     </div>
-    <script>
-        console.log("aboutpage")
-    </script>
+</div>
+
+<script>
+    console.log("aboutpage");
+</script>
 </body>
 </html>

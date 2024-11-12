@@ -1,21 +1,62 @@
 <!DOCTYPE html>
 <html
-  lang="en"
-  th:replace="~{base ::parent(~{::#content},~{::title},~{})}"
+        lang="en"
+        th:replace="~{base ::parent(~{::#content},~{::title},~{})}"
 >
-  <head>
-    <title>Services Page</title>
-  </head>
-  <body>
-    <section id="content">
-      <h1>Welcome to Services Page</h1>
-      <h2>Services offered by SCM</h2>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, impedit.
-      </p>
-    </section>
-    <script>
-      console.log("services page");
-    </script>
-  </body>
+<head>
+  <title>Services Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<section id="content" class="p-8 max-w-5xl mx-auto bg-white rounded-lg shadow-lg">
+  <h1 class="text-4xl font-bold text-center text-gray-800 mb-4">Welcome to Services Page</h1>
+  <h2 class="text-2xl text-center text-gray-600 mb-6">Services offered by SCM</h2>
+  <p class="text-center text-gray-500">
+    Explore a variety of services offered by Smart Contact Manager to help manage your contacts efficiently and securely.
+  </p>
+
+  <!-- Service Cards Section -->
+  <div class="service-section mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Service 1 -->
+    <div class="service-card p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 text-center">
+      <div class="service-icon text-5xl text-blue-500 mb-4">📇</div>
+      <div class="service-title text-xl font-semibold text-gray-800 mb-2">Contact Management</div>
+      <div class="service-description text-gray-600">
+        Organize your contacts, add new ones, and securely store contact information.
+      </div>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 text-center">
+      <div class="service-icon text-5xl text-blue-500 mb-4">🔒</div>
+      <div class="service-title text-xl font-semibold text-gray-800 mb-2">Data Security</div>
+      <div class="service-description text-gray-600">
+        Protect your contact data with our high-level security features.
+      </div>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 text-center">
+      <div class="service-icon text-5xl text-blue-500 mb-4">📊</div>
+      <div class="service-title text-xl font-semibold text-gray-800 mb-2">Analytics</div>
+      <div class="service-description text-gray-600">
+        Analyze your contact data to gain insights and improve communication.
+      </div>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="service-card p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 text-center">
+      <div class="service-icon text-5xl text-blue-500 mb-4">📤</div>
+      <div class="service-title text-xl font-semibold text-gray-800 mb-2">Easy Export</div>
+      <div class="service-description text-gray-600">
+        Export contact lists in various formats for backup or sharing purposes.
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  console.log("services page");
+</script>
+</body>
 </html>
